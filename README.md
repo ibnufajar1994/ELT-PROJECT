@@ -152,27 +152,37 @@ For PacTravel's data warehouse, we have different refresh requirements based on 
 - This is critical as we need to track our daily business performance
 - Should be refreshed during off-peak hours (preferably after midnight)
 - This includes new bookings, modifications, and cancellations
+ he level of detail at which data is stored in a fact table. When we declare the grain, we’re essentially specifying what one row in a fact table represents. This decision is critical because it affects the granularity of the data, the types of analysis that can be performed, and the overall size of the Data Warehouse. From the selected business process above, we can declare the grain as follow:
 
-2. Customer Data
-- Daily updates would be ideal
-- New customer registrations and profile updates
-- Customer preference changes
-- Contact information updates
+1. **Flight Transaction Grain:**
+   **Grain:** A single data represented  one seat booking on a flight for one trip by one customer.
 
-3. Reference Data
-- Airlines and Aircraft Information: Monthly updates
-- Hotel Information: Monthly updates
-- These don't change very frequently but need to be current
+   **Dimension:** 
+ - Aircrafts
+ - Airlines
+ - Airports
+ - Customers
 
-4. Pricing Data
-- Daily updates
-- Both flight and hotel prices can change daily
-- Important for revenue analysis
-
-5. Airport Information
-- Yearly updates would be sufficient
-- This is relatively static data
-- Includes airport details, locations, etc.
-
-## Select Business Process
+**Fact Table: fact_flight_bookings**
    
+
+2. **Hotel Booking Transaction Grain:**
+   **Grain:** A single data represented by one hotel booking for one trip by one customer.
+    
+  **Dimension:** 
+ - Hotel
+ - Customers
+
+**Fact Table: fact_hotel_bookings**
+
+## Identify the Dimension ##
+Identifying dimensions is a critical step in designing a Data Warehouse because dimensions provide the descriptive context for the quantitative data stored in fact tables. Dimensions help categorize, filter, and segment data, making it easier to perform meaningful analysis. 
+
+Based on the database provided, here the dimension for the key business process of pactravel:
+
+**1. Aircraft Dimension**
+This dimension store all of the information of aircraft that used by the airlines.
+
+
+**2. Airlines Dimension**
+This dimension provided information of the Airlines that sell ticket to all routes for the customers. 
