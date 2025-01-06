@@ -180,9 +180,25 @@ Identifying dimensions is a critical step in designing a Data Warehouse because 
 
 Based on the database provided, here the dimension for the key business process of pactravel:
 
-**1. Aircraft Dimension**
+**1.Date Dimension**
+provides a comprehensive breakdown of time-related attributes. It allows for analysis across various time periods (days, weeks, months, quarters, years) and includes flags for weekends and holidays. This dimension is crucial for trend analysis, seasonality studies, and periodic reporting across all business processes.
+![image](https://github.com/user-attachments/assets/2edadd14-7111-4b8a-8b6b-6f23023b3f1c)
+
+
+**2. Aircraft Dimension**
 This dimension store all of the information of aircraft that used by the airlines.
 
 
-**2. Airlines Dimension**
-This dimension provided information of the Airlines that sell ticket to all routes for the customers. 
+**3. Airlines Dimension**
+This dimension provided information of the Airlines that sell ticket to all availaible routes for the customers. 
+
+**4. Customers Dimension**
+Contains key information about pactravel's customers, including their unique identifiers and geographical information. This dimension supports customer segmentation, regional analysis, and tracking of individual customer behaviors over time.
+
+**5. Hotel Dimension**
+Contain information related to all hotel that have partnership's with pactravel. This dimension will provide valuable insight about what hotel to be customer's preferences and choices
+
+## IDENTIFY THE FACT  ##
+A fact table stores quantitative, numeric data (facts) that are the subject of analysis. Fact tables typically represent events or transactions in the business, such as sales, payments, shipments, or reviews. Each row in a fact table corresponds to an occurrence of that event or transaction at the declared grain (level of detail). Based on the PACTRAVEL dataset and business requirements, the fact table will be identify as follow:
+
+
