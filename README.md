@@ -152,10 +152,30 @@ For PacTravel's data warehouse, we have different refresh requirements based on 
 - This is critical as we need to track our daily business performance
 - Should be refreshed during off-peak hours (preferably after midnight)
 - This includes new bookings, modifications, and cancellations
- he level of detail at which data is stored in a fact table. When we declare the grain, we’re essentially specifying what one row in a fact table represents. This decision is critical because it affects the granularity of the data, the types of analysis that can be performed, and the overall size of the Data Warehouse. From the selected business process above, we can declare the grain as follow:
+
+2. Booking Transactions (Flight & Hotel)
+ - Need daily updates
+ - This is critical as we need to track our daily business performance
+ - Should be refreshed during off-peak hours (preferably after midnight)
+ - This includes new bookings, modifications, and cancellations
+
+3. Customer Data
+ - Daily updates would be ideal
+ - New customer registrations and profile updates
+ - Customer preference changes
+ - Contact information updates
+ - Reference Data
+
+4. Airlines and Aircraft Information: Weekly updates
+5. Hotel Information: Weekly updates
+ - These don't change very frequently but need to be current
+
+## Declare Grain ##
+
+  The level of detail at which data is stored in a fact table. When we declare the grain, we’re essentially specifying what one row in a fact table represents. This decision is critical because it affects the granularity of the data, the types of analysis that can be performed, and the overall size of the Data Warehouse. From the selected business process above, we can declare the grain as follow:
 
 1. **Flight Transaction Grain:**
-   **Grain:** A single data represented  one seat booking on a flight for one trip by one customer.
+   **Grain:** A single data represented  One row per flight booking per customer per trip
 
    **Dimension:** 
  - Aircrafts
@@ -167,7 +187,7 @@ For PacTravel's data warehouse, we have different refresh requirements based on 
    
 
 2. **Hotel Booking Transaction Grain:**
-   **Grain:** A single data represented by one hotel booking for one trip by one customer.
+   **Grain:** A single data represented by One row per hotel stay per customer per trip.
     
   **Dimension:** 
  - Hotel
@@ -187,18 +207,30 @@ provides a comprehensive breakdown of time-related attributes. It allows for ana
 
 **2. Aircraft Dimension**
 This dimension store all of the information of aircraft that used by the airlines.
+![image](https://github.com/user-attachments/assets/375bc6e0-bee4-401e-bd47-71bc3aa8011f)
 
 
 **3. Airlines Dimension**
 This dimension provided information of the Airlines that sell ticket to all availaible routes for the customers. 
+![image](https://github.com/user-attachments/assets/a12eb39f-e330-460a-8b00-eeebed425e06)
 
-**4. Customers Dimension**
+**4. Airport Dimension**
+ Contain all information about airports. This information is crucial because it will give insight about favourite destination of customers.
+ ![image](https://github.com/user-attachments/assets/d374004f-19f8-4c50-b7a1-ed66c34819bb)
+
+
+**5. Customers Dimension**
 Contains key information about pactravel's customers, including their unique identifiers and geographical information. This dimension supports customer segmentation, regional analysis, and tracking of individual customer behaviors over time.
+![image](https://github.com/user-attachments/assets/f0c442ce-a9fa-4929-b8c7-a7a3e984e6df)
 
-**5. Hotel Dimension**
+
+**6. Hotel Dimension**
 Contain information related to all hotel that have partnership's with pactravel. This dimension will provide valuable insight about what hotel to be customer's preferences and choices
+![image](https://github.com/user-attachments/assets/6e093616-e0c8-4d5f-9925-da26811b1f43)
+
 
 ## IDENTIFY THE FACT  ##
 A fact table stores quantitative, numeric data (facts) that are the subject of analysis. Fact tables typically represent events or transactions in the business, such as sales, payments, shipments, or reviews. Each row in a fact table corresponds to an occurrence of that event or transaction at the declared grain (level of detail). Based on the PACTRAVEL dataset and business requirements, the fact table will be identify as follow:
+
 
 
