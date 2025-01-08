@@ -232,5 +232,47 @@ Contain information related to all hotel that have partnership's with pactravel.
 ## IDENTIFY THE FACT  ##
 A fact table stores quantitative, numeric data (facts) that are the subject of analysis. Fact tables typically represent events or transactions in the business, such as sales, payments, shipments, or reviews. Each row in a fact table corresponds to an occurrence of that event or transaction at the declared grain (level of detail). Based on the PACTRAVEL dataset and business requirements, the fact table will be identify as follow:
 
+**1. Flight Bookings Fact Table**
+The FACT_FLIGHT_BOOKINGS table captures all flight transaction details including pricing, routes, and scheduling information, allowing analysis of flight-related metrics like revenue, popular routes, and travel patterns.
 
+Measures: 
+ - Price
+ - Flight Duration
+   
+Dimensional References:
+ - customer_id (dim_customer)
+ - airline_id (dim_airlines)
+ - aircraft_id (dim_aircraft)
+ - airport_id (dim_airport)
+ - departure_date_id (dim_date)
+ - departure_time_id (dim_date)
+
+Additional Attributes:
+ - trip_id
+ - flight_number
+ - travel_class
+ - seat_number
+
+**2. Hotel Bookings Fact Table**
+ The FACT_HOTEL_BOOKINGS table tracks hotel stay transactions with details on pricing, length of stay, and amenities, enabling analysis of accommodation metrics such as revenue per hotel and booking patterns.
+
+ Measures:
+  - Price
+  - length_of_stay (derived from check_in_date and check_out_date)
+
+Dimensional References:
+ - customer_id (dim_customer)
+ - hotel_id (dim_hotel)
+ - checkin_date_id (dim_date)
+ - checkout_date_id (dim_date)
+
+Additional Attributes:
+ - trip_id
+ - breakfast_included
+
+To provides a clear overview of how each dimension is shared across multiple business processes, ensuring that the design remains consistent, scalable and flexible, we can use the Bus Matrix as the tool like shown bellow:
+![image](https://github.com/user-attachments/assets/f0da2d89-7ad5-4fd3-86b1-7395eda403d5)
+
+here the final ERD of the data warehouse:
+![ERD_PACTRAVEL_DWH](https://github.com/user-attachments/assets/1429940b-1c17-4f1d-a4fe-cffe478e9b84)
 
