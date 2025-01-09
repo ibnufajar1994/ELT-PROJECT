@@ -365,7 +365,7 @@ Tools:
 - Clone this repo using the following command:
 
   ```bash
-  git lfs clone https://github.com/ibnufajar1994/elt-pipeline-project.git
+  https://github.com/ibnufajar1994/ELT-PROJECT.git
   ```
 run the command below on the terminal:
   ```bash
