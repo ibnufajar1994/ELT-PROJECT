@@ -170,6 +170,24 @@ For PacTravel's data warehouse, we have different refresh requirements based on 
 5. Hotel Information: Weekly updates
  - These don't change very frequently but need to be current
 
+**Question 5:**
+Which dimension do you think are most critical to track historical changes?
+
+**Possible Answer:**
+I believe the customers, airlines, and hotel  is the critical aspect need to be tracked over time.
+
+**Question 6:**
+ For these dimensions, do you need to keep a full history of all changes, or is it sufficient to know the current state and the previous state?
+
+**Possible Answer:**
+For customers, airlines, and hotels we need a full history as it's crucial for our product evolution analysis. For other dimensions, knowing the current and previous state should be sufficient.
+
+**Question 7:**
+How long do you need to retain historical data for these slowly changing dimensions?
+
+**Possible Answer:**
+We'd like to keep the history indefinitely, except for customers dimension. For customers, retaining history for the past 3 years should be sufficient.
+
 ## Declare Grain ##
 
   The level of detail at which data is stored in a fact table. When we declare the grain, we’re essentially specifying what one row in a fact table represents. This decision is critical because it affects the granularity of the data, the types of analysis that can be performed, and the overall size of the Data Warehouse. From the selected business process above, we can declare the grain as follow:
@@ -275,4 +293,147 @@ To provides a clear overview of how each dimension is shared across multiple bus
 
 here the final ERD of the data warehouse:
 ![ERD_PACTRAVEL_DWH](https://github.com/user-attachments/assets/1429940b-1c17-4f1d-a4fe-cffe478e9b84)
+
+## DETERMINE THE SCD STRATEGIES ##
+
+Based on the information gathered from the client, we can determine the appropriate Slowly Changing Dimension (SCD) strategies for the pactravel data warehouse model. Let's break it down by dimension:
+
+**Customers Dimension**
+ - SCD: Type 2
+ - Reason: The client want to track historical data change on this dimension, especially on phone number and country change
+
+**Airlines Dimension**
+ - SCD: Type 2
+ - Reason: Sometimes the airlines  rebrand their airlines and change the name, we need to track this historical change. The analyst team can collect data and measure if the rebranding will affect the airlines performances.
+
+**Hotels Dimension**
+- SCD: Type 2
+- Reason: Same with the airlines, sometimes the hotel do the rebranding and change their name, event their location.
+
+**Other Dimensions**
+- SCD: type 1
+- Reason: Other dimension's seems like not to change on long period. Keep the information to the current status will be sufficient.
+
+## SCD IMPLEMENTATION ##
+| Dimension   | SCD Type | Retention Policy | Rationale |
+|-------------|----------|------------------|-----------|
+| Customers   | Type 2   | 3 Years          | Name & Address need historical tracking. |
+| Airlines    | Type 2   | Indefinetely     | Names need historical tracking. Other attributes only need current state. |
+| Hotels      | Type 2   | indefinitely     | Name & Address changes need historical tracking. Other attributes only need current state. |
+| Aircrafts   | Type 1   | indefinitely     | Most recent version of data is typically sufficient. |
+| Airports    | Type 1   | indefinitely     | Most recent version of data is typically sufficient. |
+| Date        | None    | indefinitely      | Date dimension is static and doesn't change.|
+
+# ELT WORKFLOW
+In this project, we will use 2 database. one database for the source of the data, and the other database for build the datawarehouse. we will copy all of the the data from the source database to target database. on target database, will consist of 2 schema, pactravel and final. pactravel will store all information from sources, and the final will be the schema for our datawarehouse. On final schema, the data will be transformed. Here the work flow:
+
+![Screenshot 2024-11-16 231424](https://github.com/user-attachments/assets/24dc58b1-88fb-4e64-b287-07efd790b4a1)
+
+# ELT PIPELINE ORCHESTRATION
+In this project, we will use luigi as the orchestration tools. We will extract all the data from the database as the csv file format, and then dump the data to the pactravel schema on the target database where we will implemented the datawarehouse schema. As the data from pactravel schema is ready, we will use dbt as the tool for transform the data and dump it to the final schema. Sentry will be used as alerting and notification tools. 
+
+![FIGURE](https://github.com/user-attachments/assets/4896131f-d994-4504-a385-09afc3038c2c)
+
+Tools:
+- Orchestration: Luigi
+- Schedulling: Cron
+- Write summary : pandas
+- Logging: logging.info for write logs for every step of the proccess and logging.error for write error
+- alerting & notification: sentry. you can visit the sentry website to read the documentation in this [link](https://sentry.io/welcome/)
+
+ How to use this repo:
+## 1. Requirements
+- **OS:**
+  - Linux
+  - WSL
+- **Tools:**
+  - Dbeaver
+  - Docker
+  - Cron
+  - dbt
+- **Programming Language:**
+  - Python
+  - SQL
+- **Python Library:**
+  - Luigi
+  - Pandas
+  - Sentry-SDK
+- **Platforms**
+   - Sentry
+
+## 2.Preparations
+- Clone this repo using the following command:
+
+  ```bash
+  git lfs clone https://github.com/ibnufajar1994/elt-pipeline-project.git
+  ```
+run the command below on the terminal:
+  ```bash
+  docker compose up -d
+  ```
+  
+- Create Sentry Project
+  - visit: https://www.sentry.io
+  - Signup with email that you want get notifications and alert
+  - Create Project on sentry:
+    - use python as a platform
+    - set alert frequency as "on every new issue"
+    - Create project name
+    - **Copy the DSN of your project into .env file**
+
+- Create temp dir. on your root project directory:
+```bash
+mkdir pipeline/temp/data
+mkdir pipeline/temp/log
+```
+- Create & use virtual environment on your root directory project
+- Install the requirements using the following command:
+```bash
+pip install -r requirements.txt
+```
+
+- **Create env file in your root project directory, copy this variable into it.you need to adjust the value based on your preferences:**
+  
+```bash
+SRC_POSTGRES_DB=...
+SRC_POSTGRES_HOST=...
+SRC_POSTGRES_USER=...
+SRC_POSTGRES_PASSWORD=...
+SRC_POSTGRES_PORT=...
+
+# DWH
+DWH_POSTGRES_DB=...
+DWH_POSTGRES_HOST=...
+DWH_POSTGRES_USER=...
+DWH_POSTGRES_PASSWORD=...
+DWH_POSTGRES_PORT=...
+
+# SENTRY DSN
+SENTRY_DSN=... # Fill with your Sentry DSN Project 
+
+# DIRECTORY
+# Adjust with your directory. make sure to write full path
+DIR_ROOT_PROJECT=...     # <project_dir>
+DIR_TEMP_LOG=...         # <project_dir>/pipeline/temp/log
+DIR_TEMP_DATA=...        # <project_dir>/pipeline/temp/data
+DIR_EXTRACT_QUERY=...    # <project_dir>/pipeline/src_query/extract
+DIR_LOAD_QUERY=...       # <project_dir>/pipeline/src_query/load
+DIR_DBT_TRANSFORM=...    # <project_dir>/dbt_transform/
+DIR_LOG=...              # <project_dir>/logs/
+```
+- run this command on the backround process:
+  ```bash
+  luigid --port 8082 &
+  ```
+- you can run this command directly on the terminal to run the pipeline:
+   ```bash
+   python3 elt_main.py
+   ```
+- or you can schedulling using cron, for example on the code below is the command to run the pipeline every one hour.
+    ```bash
+   0 * * * * <project_dir>/elt_run.sh
+   ```
+
+
+
 
