@@ -1,0 +1,29 @@
+version: 2
+
+snapshots:
+  - name: dim_airlines_snapshot
+    description: "Snapshot table for airlines"
+    columns:
+      - name: airline_id_sk
+        description: "Primary Key for airline"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+  - name: dim_customers_snapshot
+    description: "Snapshot table for customers"
+    columns:
+      - name: customer_id_sk
+        description: "Primary Key for customer"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+  - name: dim_hotels_snapshot
+    description: "Snapshot table for hotels"
+    columns:
+      - name: hotel_id_sk
+        description: "Primary Key for hotel"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key

@@ -1,0 +1,146 @@
+version: 2
+
+seeds:
+  - name: dim_date
+    description: "Dimension table for dates table"
+    columns:
+      - name: date_id
+        description: "Primary Key for dim_date"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+  - name: dim_time
+    description: "Dimension table for times table"
+    columns:
+      - name: time_id
+        description: "Primary Key for dim_time"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+
+models:
+  - name: dim_aircrafts
+    description: "Dimension table for aircrafts"
+    columns:
+      - name: aircraft_id_sk
+        description: "Surrogate Key for aircraft"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+  - name: dim_airports
+    description: "Dimension table for airports"
+    columns:
+      - name: airport_id_sk
+        description: "Surrogate Key for airport"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+
+  - name: fact_flight_bookings
+    description: "Fact table for flight bookings"
+    columns:
+      - name: trip_id_sk
+        description: "Primary Key for fact flight booking"
+        tests:
+          - dbt_constraints.primary_key
+      
+      - name: aircraft_id_sk
+        description: "Foreign Key to dim_aircrafts"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_aircrafts')
+              pk_column_name: aircraft_id_sk
+
+      - name: airline_id_sk
+        description: "Foreign Key to dim_airlines"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_airlines')
+              pk_column_name: airline_id_sk
+
+      - name: departure_airport_sk
+        description: "Foreign Key to dim_airports for departure airports"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_airports')
+              pk_column_name: airport_id_sk
+
+      - name: arrival_airport_sk
+        description: "Foreign Key to dim_airports for arrival airports"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_airports')
+              pk_column_name: airport_id_sk
+
+      - name: customer_id_sk
+        description: "Foreign Key to dim_customers"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_customers')
+              pk_column_name: customer_id_sk
+
+      - name: departure_date_id
+        description: "Foreign Key to dim_date"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_date')
+              pk_column_name: date_id
+
+      - name: departure_time_id
+        description: "Foreign Key to dim_time"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_time')
+              pk_column_name: time_id
+
+  - name: fact_hotel_bookings
+    description: "Fact table for hotel bookings"
+    columns:
+      - name: trip_id_sk
+        description: "Primary Key for fact hotel booking"
+        tests:
+          - not_null
+          - dbt_constraints.primary_key
+
+      - name: customer_id_sk
+        description: "Foreign Key to dim_customers"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_customers')
+              pk_column_name: customer_id_sk
+
+      - name: hotel_id_sk
+        description: "Foreign Key to dim_hotels"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_hotels')
+              pk_column_name: hotel_id_sk
+
+      - name: check_in_date_id
+        description: "Foreign Key to dim_date for check-in"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_date')
+              pk_column_name: date_id
+
+      - name: check_out_date_id
+        description: "Foreign Key to dim_date for check-out"
+        tests:
+          - not_null
+          - dbt_constraints.foreign_key:
+              pk_table_name: ref('dim_date')
+              pk_column_name: date_id
