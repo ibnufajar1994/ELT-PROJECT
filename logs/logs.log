@@ -1,0 +1,312 @@
+2025-01-18 17:56:04,380 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-18 17:56:04,410 - INFO - EXTRACT 'aircrafts' - SUCCESS.
+2025-01-18 17:56:04,418 - INFO - EXTRACT 'airlines' - SUCCESS.
+2025-01-18 17:56:04,423 - INFO - EXTRACT 'airports' - SUCCESS.
+2025-01-18 17:56:04,432 - INFO - EXTRACT 'customers' - SUCCESS.
+2025-01-18 17:56:04,449 - INFO - EXTRACT 'hotels' - SUCCESS.
+2025-01-18 17:56:04,525 - INFO - EXTRACT 'flight_bookings' - SUCCESS.
+2025-01-18 17:56:04,532 - INFO - EXTRACT 'hotel_bookings' - SUCCESS.
+2025-01-18 17:56:04,532 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-18 17:56:04,534 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-18 17:56:04,534 - INFO - [pid 11430] Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) done      Extract()
+2025-01-18 17:56:04,535 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 17:56:04,538 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-18 17:56:04,539 - DEBUG - Asking scheduler for work...
+2025-01-18 17:56:04,542 - DEBUG - Pending tasks: 2
+2025-01-18 17:56:04,542 - INFO - [pid 11430] Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) running   Load()
+2025-01-18 17:56:04,579 - INFO - Read Extracted Data - SUCCESS
+2025-01-18 17:56:04,580 - INFO - Connect to DWH - SUCCESS
+2025-01-18 17:56:04,580 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-18 17:56:04,640 - INFO - LOAD 'staging.aircrafts' - SUCCESS
+2025-01-18 17:56:04,781 - INFO - LOAD 'staging.airlines' - SUCCESS
+2025-01-18 17:56:04,833 - INFO - LOAD 'staging.airports' - SUCCESS
+2025-01-18 17:56:04,987 - INFO - LOAD 'staging.customers' - SUCCESS
+2025-01-18 17:56:05,217 - INFO - LOAD 'staging.hotels' - SUCCESS
+2025-01-18 17:56:07,805 - INFO - LOAD 'staging.flight_bookings' - SUCCESS
+2025-01-18 17:56:07,846 - INFO - LOAD 'staging.hotel_bookings' - SUCCESS
+2025-01-18 17:56:07,847 - INFO - LOAD All Tables To DWH-dvdrental - SUCCESS
+2025-01-18 17:56:07,849 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-18 17:56:07,849 - INFO - [pid 11430] Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) done      Load()
+2025-01-18 17:56:07,850 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 17:56:07,855 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-18 17:56:07,855 - DEBUG - Asking scheduler for work...
+2025-01-18 17:56:07,860 - DEBUG - Pending tasks: 1
+2025-01-18 17:56:07,860 - INFO - [pid 11430] Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) running   Transform()
+2025-01-18 17:56:07,861 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+[0m10:56:09  Running with dbt=1.9.1
+[0m10:56:09  Registered adapter: postgres=1.9.0
+[0m10:56:10  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m10:56:10  
+[0m10:56:10  Concurrency: 1 threads (target='dev')
+[0m10:56:10  
+[0m10:56:10  1 of 3 START snapshot final.dim_airlines_snapshot .............................. [RUN]
+[0m10:56:11  1 of 3 OK snapshotted final.dim_airlines_snapshot .............................. [[32mINSERT 0 0[0m in 0.39s]
+[0m10:56:11  2 of 3 START snapshot final.dim_customers_snapshot ............................. [RUN]
+[0m10:56:11  2 of 3 OK snapshotted final.dim_customers_snapshot ............................. [[32mINSERT 0 0[0m in 0.16s]
+[0m10:56:11  3 of 3 START snapshot final.dim_hotels_snapshot ................................ [RUN]
+[0m10:56:11  3 of 3 OK snapshotted final.dim_hotels_snapshot ................................ [[32mINSERT 0 0[0m in 0.16s]
+[0m10:56:11  
+[0m10:56:11  Running dbt Constraints
+[0m10:56:11  Finished dbt Constraints
+[0m10:56:11  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m10:56:11  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.07s]
+[0m10:56:11  
+[0m10:56:11  Finished running 1 project hook, 3 snapshots in 0 hours 0 minutes and 0.96 seconds (0.96s).
+[0m10:56:11  
+[0m10:56:11  [32mCompleted successfully[0m
+[0m10:56:11  
+[0m10:56:11  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 TOTAL=4
+[0m10:56:14  Running with dbt=1.9.1
+[0m10:56:15  Registered adapter: postgres=1.9.0
+[0m10:56:15  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m10:56:15  
+[0m10:56:15  Concurrency: 1 threads (target='dev')
+[0m10:56:15  
+[0m10:56:16  1 of 4 START sql table model final.dim_aircrafts ............................... [RUN]
+[0m10:56:16  1 of 4 OK created sql table model final.dim_aircrafts .......................... [[32mSELECT 246[0m in 0.26s]
+[0m10:56:16  2 of 4 START sql table model final.dim_airports ................................ [RUN]
+[0m10:56:16  2 of 4 OK created sql table model final.dim_airports ........................... [[32mSELECT 105[0m in 0.10s]
+[0m10:56:16  3 of 4 START sql table model final.hotel_bookings .............................. [RUN]
+[0m10:56:16  3 of 4 OK created sql table model final.hotel_bookings ......................... [[32mSELECT 217[0m in 0.11s]
+[0m10:56:16  4 of 4 START sql table model final.flight_bookings ............................. [RUN]
+[0m10:56:16  4 of 4 OK created sql table model final.flight_bookings ........................ [[32mSELECT 8190[0m in 0.15s]
+[0m10:56:16  
+[0m10:56:16  Running dbt Constraints
+[0m10:56:16  Finished dbt Constraints
+[0m10:56:16  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m10:56:16  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.06s]
+[0m10:56:16  
+[0m10:56:16  Finished running 1 project hook, 4 table models in 0 hours 0 minutes and 0.84 seconds (0.84s).
+[0m10:56:16  
+[0m10:56:16  [32mCompleted successfully[0m
+[0m10:56:16  
+[0m10:56:16  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
+2025-01-18 17:56:18,670 - INFO - ==================================ENDING TRANSFROM DATA=======================================
+2025-01-18 17:56:18,670 - INFO - [pid 11430] Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) done      Transform()
+2025-01-18 17:56:18,671 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 17:56:18,674 - INFO - Informed scheduler that task   Transform__99914b932b   has status   DONE
+2025-01-18 17:56:18,675 - DEBUG - Asking scheduler for work...
+2025-01-18 17:56:18,677 - DEBUG - Done
+2025-01-18 17:56:18,678 - DEBUG - There are no more tasks to run at this time
+2025-01-18 17:56:18,678 - INFO - Worker Worker(salt=7813258448, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=11430) was stopped. Shutting down Keep-Alive thread
+2025-01-18 17:56:18,679 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 3 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+    - 1 Transform()
+
+This progress looks :) because there were no failed tasks or missing dependencies
+
+===== Luigi Execution Summary =====
+
+2025-01-18 18:14:06,124 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-18 18:14:06,140 - INFO - EXTRACT 'aircrafts' - SUCCESS.
+2025-01-18 18:14:06,145 - INFO - EXTRACT 'airlines' - SUCCESS.
+2025-01-18 18:14:06,148 - INFO - EXTRACT 'airports' - SUCCESS.
+2025-01-18 18:14:06,153 - INFO - EXTRACT 'customers' - SUCCESS.
+2025-01-18 18:14:06,160 - INFO - EXTRACT 'hotels' - SUCCESS.
+2025-01-18 18:14:06,206 - INFO - EXTRACT 'flight_bookings' - SUCCESS.
+2025-01-18 18:14:06,210 - INFO - EXTRACT 'hotel_bookings' - SUCCESS.
+2025-01-18 18:14:06,210 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-18 18:14:06,211 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-18 18:14:06,212 - INFO - [pid 16215] Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) done      Extract()
+2025-01-18 18:14:06,213 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 18:14:06,215 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-18 18:14:06,216 - DEBUG - Asking scheduler for work...
+2025-01-18 18:14:06,217 - DEBUG - Pending tasks: 2
+2025-01-18 18:14:06,217 - INFO - [pid 16215] Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) running   Load()
+2025-01-18 18:14:06,238 - INFO - Read Extracted Data - SUCCESS
+2025-01-18 18:14:06,239 - INFO - Connect to DWH - SUCCESS
+2025-01-18 18:14:06,239 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-18 18:14:06,270 - INFO - LOAD 'staging.aircrafts' - SUCCESS
+2025-01-18 18:14:06,347 - INFO - LOAD 'staging.airlines' - SUCCESS
+2025-01-18 18:14:06,384 - INFO - LOAD 'staging.airports' - SUCCESS
+2025-01-18 18:14:06,461 - INFO - LOAD 'staging.customers' - SUCCESS
+2025-01-18 18:14:06,567 - INFO - LOAD 'staging.hotels' - SUCCESS
+2025-01-18 18:14:08,018 - INFO - LOAD 'staging.flight_bookings' - SUCCESS
+2025-01-18 18:14:08,041 - INFO - LOAD 'staging.hotel_bookings' - SUCCESS
+2025-01-18 18:14:08,041 - INFO - LOAD All Tables To DWH-dvdrental - SUCCESS
+2025-01-18 18:14:08,042 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-18 18:14:08,043 - INFO - [pid 16215] Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) done      Load()
+2025-01-18 18:14:08,043 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 18:14:08,045 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-18 18:14:08,046 - DEBUG - Asking scheduler for work...
+2025-01-18 18:14:08,047 - DEBUG - Pending tasks: 1
+2025-01-18 18:14:08,047 - INFO - [pid 16215] Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) running   Transform()
+2025-01-18 18:14:08,048 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+[0m11:14:08  Running with dbt=1.9.1
+[0m11:14:09  Registered adapter: postgres=1.9.0
+[0m11:14:09  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m11:14:09  
+[0m11:14:09  Concurrency: 1 threads (target='dev')
+[0m11:14:09  
+[0m11:14:09  1 of 3 START snapshot final.dim_airlines_snapshot .............................. [RUN]
+[0m11:14:09  1 of 3 OK snapshotted final.dim_airlines_snapshot .............................. [[32mINSERT 0 0[0m in 0.21s]
+[0m11:14:09  2 of 3 START snapshot final.dim_customers_snapshot ............................. [RUN]
+[0m11:14:09  2 of 3 OK snapshotted final.dim_customers_snapshot ............................. [[32mINSERT 0 0[0m in 0.11s]
+[0m11:14:09  3 of 3 START snapshot final.dim_hotels_snapshot ................................ [RUN]
+[0m11:14:09  3 of 3 OK snapshotted final.dim_hotels_snapshot ................................ [[32mINSERT 0 0[0m in 0.11s]
+[0m11:14:09  
+[0m11:14:10  Running dbt Constraints
+[0m11:14:10  Finished dbt Constraints
+[0m11:14:10  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m11:14:10  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.04s]
+[0m11:14:10  
+[0m11:14:10  Finished running 1 project hook, 3 snapshots in 0 hours 0 minutes and 0.56 seconds (0.56s).
+[0m11:14:10  
+[0m11:14:10  [32mCompleted successfully[0m
+[0m11:14:10  
+[0m11:14:10  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 TOTAL=4
+[0m11:14:12  Running with dbt=1.9.1
+[0m11:14:12  Registered adapter: postgres=1.9.0
+[0m11:14:12  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m11:14:12  
+[0m11:14:12  Concurrency: 1 threads (target='dev')
+[0m11:14:12  
+[0m11:14:12  1 of 4 START sql table model final.dim_aircrafts ............................... [RUN]
+[0m11:14:13  1 of 4 OK created sql table model final.dim_aircrafts .......................... [[32mSELECT 246[0m in 0.15s]
+[0m11:14:13  2 of 4 START sql table model final.dim_airports ................................ [RUN]
+[0m11:14:13  2 of 4 OK created sql table model final.dim_airports ........................... [[32mSELECT 105[0m in 0.06s]
+[0m11:14:13  3 of 4 START sql table model final.fact_hotel_bookings ......................... [RUN]
+[0m11:14:13  3 of 4 OK created sql table model final.fact_hotel_bookings .................... [[32mSELECT 217[0m in 0.08s]
+[0m11:14:13  4 of 4 START sql table model final.fact_flight_bookings ........................ [RUN]
+[0m11:14:13  4 of 4 OK created sql table model final.fact_flight_bookings ................... [[32mSELECT 8190[0m in 0.11s]
+[0m11:14:13  
+[0m11:14:13  Running dbt Constraints
+[0m11:14:13  Finished dbt Constraints
+[0m11:14:13  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m11:14:13  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.04s]
+[0m11:14:13  
+[0m11:14:13  Finished running 1 project hook, 4 table models in 0 hours 0 minutes and 0.53 seconds (0.53s).
+[0m11:14:13  
+[0m11:14:13  [32mCompleted successfully[0m
+[0m11:14:13  
+[0m11:14:13  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
+2025-01-18 18:14:14,757 - INFO - ==================================ENDING TRANSFROM DATA=======================================
+2025-01-18 18:14:14,757 - INFO - [pid 16215] Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) done      Transform()
+2025-01-18 18:14:14,757 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 18:14:14,760 - INFO - Informed scheduler that task   Transform__99914b932b   has status   DONE
+2025-01-18 18:14:14,760 - DEBUG - Asking scheduler for work...
+2025-01-18 18:14:14,762 - DEBUG - Done
+2025-01-18 18:14:14,762 - DEBUG - There are no more tasks to run at this time
+2025-01-18 18:14:14,762 - INFO - Worker Worker(salt=3935643045, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=16215) was stopped. Shutting down Keep-Alive thread
+2025-01-18 18:14:14,763 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 3 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+    - 1 Transform()
+
+This progress looks :) because there were no failed tasks or missing dependencies
+
+===== Luigi Execution Summary =====
+
+2025-01-18 19:06:52,364 - INFO - ==================================STARTING EXTRACT DATA=======================================
+2025-01-18 19:06:52,385 - INFO - EXTRACT 'aircrafts' - SUCCESS.
+2025-01-18 19:06:52,391 - INFO - EXTRACT 'airlines' - SUCCESS.
+2025-01-18 19:06:52,393 - INFO - EXTRACT 'airports' - SUCCESS.
+2025-01-18 19:06:52,398 - INFO - EXTRACT 'customers' - SUCCESS.
+2025-01-18 19:06:52,408 - INFO - EXTRACT 'hotels' - SUCCESS.
+2025-01-18 19:06:52,456 - INFO - EXTRACT 'flight_bookings' - SUCCESS.
+2025-01-18 19:06:52,460 - INFO - EXTRACT 'hotel_bookings' - SUCCESS.
+2025-01-18 19:06:52,460 - INFO - Extract All Tables From Sources - SUCCESS
+2025-01-18 19:06:52,461 - INFO - ==================================ENDING EXTRACT DATA=======================================
+2025-01-18 19:06:52,462 - INFO - [pid 26775] Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) done      Extract()
+2025-01-18 19:06:52,462 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 19:06:52,465 - INFO - Informed scheduler that task   Extract__99914b932b   has status   DONE
+2025-01-18 19:06:52,465 - DEBUG - Asking scheduler for work...
+2025-01-18 19:06:52,467 - DEBUG - Pending tasks: 2
+2025-01-18 19:06:52,467 - INFO - [pid 26775] Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) running   Load()
+2025-01-18 19:06:52,486 - INFO - Read Extracted Data - SUCCESS
+2025-01-18 19:06:52,486 - INFO - Connect to DWH - SUCCESS
+2025-01-18 19:06:52,486 - INFO - ==================================STARTING LOAD DATA=======================================
+2025-01-18 19:06:52,523 - INFO - LOAD 'staging.aircrafts' - SUCCESS
+2025-01-18 19:06:52,605 - INFO - LOAD 'staging.airlines' - SUCCESS
+2025-01-18 19:06:52,640 - INFO - LOAD 'staging.airports' - SUCCESS
+2025-01-18 19:06:52,722 - INFO - LOAD 'staging.customers' - SUCCESS
+2025-01-18 19:06:52,834 - INFO - LOAD 'staging.hotels' - SUCCESS
+2025-01-18 19:06:54,286 - INFO - LOAD 'staging.flight_bookings' - SUCCESS
+2025-01-18 19:06:54,319 - INFO - LOAD 'staging.hotel_bookings' - SUCCESS
+2025-01-18 19:06:54,319 - INFO - LOAD All Tables To DWH-dvdrental - SUCCESS
+2025-01-18 19:06:54,321 - INFO - ==================================ENDING LOAD DATA=======================================
+2025-01-18 19:06:54,321 - INFO - [pid 26775] Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) done      Load()
+2025-01-18 19:06:54,321 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 19:06:54,324 - INFO - Informed scheduler that task   Load__99914b932b   has status   DONE
+2025-01-18 19:06:54,324 - DEBUG - Asking scheduler for work...
+2025-01-18 19:06:54,326 - DEBUG - Pending tasks: 1
+2025-01-18 19:06:54,327 - INFO - [pid 26775] Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) running   Transform()
+2025-01-18 19:06:54,327 - INFO - ==================================STARTING TRANSFROM DATA=======================================
+[0m12:06:54  Running with dbt=1.9.1
+[0m12:06:54  Registered adapter: postgres=1.9.0
+[0m12:06:54  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m12:06:54  
+[0m12:06:54  Concurrency: 1 threads (target='dev')
+[0m12:06:54  
+[0m12:06:54  1 of 3 START snapshot final.dim_airlines_snapshot .............................. [RUN]
+[0m12:06:55  1 of 3 OK snapshotted final.dim_airlines_snapshot .............................. [[32mINSERT 0 0[0m in 0.20s]
+[0m12:06:55  2 of 3 START snapshot final.dim_customers_snapshot ............................. [RUN]
+[0m12:06:55  2 of 3 OK snapshotted final.dim_customers_snapshot ............................. [[32mINSERT 0 0[0m in 0.08s]
+[0m12:06:55  3 of 3 START snapshot final.dim_hotels_snapshot ................................ [RUN]
+[0m12:06:55  3 of 3 OK snapshotted final.dim_hotels_snapshot ................................ [[32mINSERT 0 0[0m in 0.09s]
+[0m12:06:55  
+[0m12:06:55  Running dbt Constraints
+[0m12:06:55  Finished dbt Constraints
+[0m12:06:55  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m12:06:55  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.04s]
+[0m12:06:55  
+[0m12:06:55  Finished running 1 project hook, 3 snapshots in 0 hours 0 minutes and 0.51 seconds (0.51s).
+[0m12:06:55  
+[0m12:06:55  [32mCompleted successfully[0m
+[0m12:06:55  
+[0m12:06:55  Done. PASS=4 WARN=0 ERROR=0 SKIP=0 TOTAL=4
+[0m12:06:57  Running with dbt=1.9.1
+[0m12:06:57  Registered adapter: postgres=1.9.0
+[0m12:06:58  Found 4 models, 3 snapshots, 2 seeds, 1 operation, 35 data tests, 7 sources, 889 macros
+[0m12:06:58  
+[0m12:06:58  Concurrency: 1 threads (target='dev')
+[0m12:06:58  
+[0m12:06:58  1 of 4 START sql table model final.dim_aircrafts ............................... [RUN]
+[0m12:06:58  1 of 4 OK created sql table model final.dim_aircrafts .......................... [[32mSELECT 246[0m in 0.14s]
+[0m12:06:58  2 of 4 START sql table model final.dim_airports ................................ [RUN]
+[0m12:06:58  2 of 4 OK created sql table model final.dim_airports ........................... [[32mSELECT 105[0m in 0.05s]
+[0m12:06:58  3 of 4 START sql table model final.fact_hotel_bookings ......................... [RUN]
+[0m12:06:58  3 of 4 OK created sql table model final.fact_hotel_bookings .................... [[32mSELECT 217[0m in 0.06s]
+[0m12:06:58  4 of 4 START sql table model final.fact_flight_bookings ........................ [RUN]
+[0m12:06:58  4 of 4 OK created sql table model final.fact_flight_bookings ................... [[32mSELECT 8190[0m in 0.10s]
+[0m12:06:58  
+[0m12:06:58  Running dbt Constraints
+[0m12:06:58  Finished dbt Constraints
+[0m12:06:58  1 of 1 START hook: dbt_constraints.on-run-end.0 ................................ [RUN]
+[0m12:06:58  1 of 1 OK hook: dbt_constraints.on-run-end.0 ................................... [[32mOK[0m in 0.04s]
+[0m12:06:58  
+[0m12:06:58  Finished running 1 project hook, 4 table models in 0 hours 0 minutes and 0.49 seconds (0.49s).
+[0m12:06:58  
+[0m12:06:58  [32mCompleted successfully[0m
+[0m12:06:58  
+[0m12:06:58  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
+2025-01-18 19:07:00,126 - INFO - ==================================ENDING TRANSFROM DATA=======================================
+2025-01-18 19:07:00,127 - INFO - [pid 26775] Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) done      Transform()
+2025-01-18 19:07:00,127 - DEBUG - 1 running tasks, waiting for next task to finish
+2025-01-18 19:07:00,129 - INFO - Informed scheduler that task   Transform__99914b932b   has status   DONE
+2025-01-18 19:07:00,130 - DEBUG - Asking scheduler for work...
+2025-01-18 19:07:00,132 - DEBUG - Done
+2025-01-18 19:07:00,132 - DEBUG - There are no more tasks to run at this time
+2025-01-18 19:07:00,132 - INFO - Worker Worker(salt=8765270119, workers=1, host=LAPTOP-CTL1KJN3, username=ibnufajar, pid=26775) was stopped. Shutting down Keep-Alive thread
+2025-01-18 19:07:00,133 - INFO - 
+===== Luigi Execution Summary =====
+
+Scheduled 3 tasks of which:
+* 3 ran successfully:
+    - 1 Extract()
+    - 1 Load()
+    - 1 Transform()
+
+This progress looks :) because there were no failed tasks or missing dependencies
+
+===== Luigi Execution Summary =====
+
